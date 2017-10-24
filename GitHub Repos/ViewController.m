@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic) NSArray<Repo *> *repos;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+- (IBAction)getMostRecent:(UIBarButtonItem *)sender;
 
 
 @end
@@ -30,7 +31,7 @@
 
     
 
-    NSURL *url = [NSURL URLWithString:@"https://api.github.com/users/ashpland/repos"]; // 1
+    NSURL *url = [NSURL URLWithString:@"https://api.github.com/users/ashpland/repos?sort=updated"]; // 1
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:url]; // 2
     
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration]; // 3
@@ -106,6 +107,28 @@
                                         initWithURL:self.repos[repoIndex].url];
     [self presentViewController:safariVC animated:YES completion:nil];
 }
+
+
+
+- (IBAction)getMostRecent:(UIBarButtonItem *)sender {
+    
+    [UIPasteboard generalPasteboard].string = [self.repos[0].url absoluteString];
+
+    
+    UIAlertController *copyAlert = [UIAlertController alertControllerWithTitle:@"URL Copied" message:nil preferredStyle:UIAlertControllerStyleAlert];
+
+    [self presentViewController:copyAlert animated:YES completion:nil];
+    
+    [self performSelector:@selector(dismissAlert:) withObject:copyAlert afterDelay:1.0];
+    
+}
+
+-(void)dismissAlert:(UIAlertController *)alert
+{
+    [alert dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 
 
 

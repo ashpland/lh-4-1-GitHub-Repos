@@ -31,7 +31,7 @@
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZaD-2h-Twz">
                                                     <rect key="frame" x="15" y="0.0" width="325" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -54,7 +54,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="My Repos" id="vU1-OP-jgt"/>
+                    <navigationItem key="navigationItem" title="My Repos" id="vU1-OP-jgt">
+                        <barButtonItem key="rightBarButtonItem" title="Copy Recent" id="QN7-AA-Ppw">
+                            <connections>
+                                <action selector="getMostRecent:" destination="BYZ-38-t0r" id="9yE-xB-xiv"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="g6A-eP-Ihk" id="dCH-xh-zr1"/>
                     </connections>
