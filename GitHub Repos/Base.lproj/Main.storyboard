@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="g6A-eP-Ihk">
-                                <rect key="frame" x="0.0" y="32" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="repoCell" textLabel="ZaD-2h-Twz" style="IBUITableViewCellStyleDefault" id="lmy-Ex-S4i">
@@ -50,7 +50,7 @@
                             <constraint firstItem="g6A-eP-Ihk" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="67F-ww-x14"/>
                             <constraint firstItem="g6A-eP-Ihk" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="CQA-RA-rnd"/>
                             <constraint firstItem="g6A-eP-Ihk" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="Kce-mn-Fek"/>
-                            <constraint firstItem="g6A-eP-Ihk" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="RBF-Er-oPj"/>
+                            <constraint firstItem="g6A-eP-Ihk" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" id="RBF-Er-oPj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

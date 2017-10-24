@@ -7,11 +7,12 @@
 //
 
 #import "ViewController.h"
+#import "Repo.h"
 @import SafariServices;
 
 @interface ViewController ()
 
-@property (strong, nonatomic) NSArray<NSDictionary *> *repos;
+@property (strong, nonatomic) NSArray<Repo *> *repos;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 
@@ -22,6 +23,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.repos = @[];
+    
     self.navigationController.navigationBar.prefersLargeTitles = YES;
     
 
@@ -45,7 +48,7 @@
         }
         
         NSError *jsonError = nil;
-        NSArray *repos = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError]; // 2
+        NSArray *repoDicts = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError]; // 2
         
         if (jsonError) { // 3
             // Handle the error
@@ -53,21 +56,22 @@
             return;
         }
         
-        self.repos = repos;
+        
+        
+        for (NSDictionary *currentRepo in repoDicts) {
+            
+            Repo *newRepo = [[Repo alloc] initWithName:[currentRepo objectForKey:@"name"]
+                                                andURL:[NSURL URLWithString:[currentRepo objectForKey:@"html_url"]]];
+            
+            self.repos = [self.repos arrayByAddingObject:newRepo];
+            
+        }
+        
         
         
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             [self.tableView reloadData];
         }];
-        
-//
-//
-//        // If we reach this point, we have successfully retrieved the JSON from the API
-//        for (NSDictionary *repo in repos) { // 4
-//
-//            NSString *repoName = repo[@"name"];
-//            NSLog(@"repo: %@", repoName);
-//        }
         
     }]; // 5
     
@@ -86,7 +90,7 @@
 {
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"repoCell"];
     
-    cell.textLabel.text = [self.repos[indexPath.row] objectForKey:@"name"];
+    cell.textLabel.text = self.repos[indexPath.row].name;
     
     return cell;
 }
@@ -98,9 +102,8 @@
 }
 
 - (void)showWebSiteForRepo:(NSInteger)repoIndex {
-    NSURL *url = [NSURL URLWithString:[self.repos[repoIndex] objectForKey:@"html_url"]];
-    SFSafariViewController *safariVC = [[SFSafariViewController alloc] initWithURL:url];
-//    [self showViewController:safariVC sender:nil];
+    SFSafariViewController *safariVC = [[SFSafariViewController alloc]
+                                        initWithURL:self.repos[repoIndex].url];
     [self presentViewController:safariVC animated:YES completion:nil];
 }
 
