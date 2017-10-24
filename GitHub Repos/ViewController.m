@@ -72,6 +72,7 @@
         
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             [self.tableView reloadData];
+            [self getMostRecent:nil];
         }];
         
     }]; // 5
