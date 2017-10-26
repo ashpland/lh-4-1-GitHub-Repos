@@ -72,13 +72,16 @@
         
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             [self.tableView reloadData];
-            [self getMostRecent:nil];
+            [self copyMostRecentRepo];
         }];
         
     }]; // 5
     
     [dataTask resume]; // 6
 }
+
+
+
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -112,16 +115,18 @@
 
 
 - (IBAction)getMostRecent:(UIBarButtonItem *)sender {
-    
-    [UIPasteboard generalPasteboard].string = [self.repos[0].url absoluteString];
+    [self copyMostRecentRepo];
+}
 
+-(void)copyMostRecentRepo
+{
+    [UIPasteboard generalPasteboard].string = [self.repos[0].url absoluteString];
     
     UIAlertController *copyAlert = [UIAlertController alertControllerWithTitle:@"URL Copied" message:nil preferredStyle:UIAlertControllerStyleAlert];
-
+    
     [self presentViewController:copyAlert animated:YES completion:nil];
     
     [self performSelector:@selector(dismissAlert:) withObject:copyAlert afterDelay:1.0];
-    
 }
 
 -(void)dismissAlert:(UIAlertController *)alert
